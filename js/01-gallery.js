@@ -1,7 +1,6 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-let modalDict = {};
 let currentModalInstance;
 
 const galleryItemArr = makeGalleryItem(galleryItems);
@@ -19,27 +18,21 @@ galleryParrentEL.addEventListener('click', (event) => {
   if (!event.target.classList.contains('gallery__image')) {
     return;
   }
-  console.log(event.target.parentElement);
-
   const imgUrl = event.target.parentElement.href;
 
-  if (!modalDict[imgUrl]) {
-    modalDict[imgUrl] = basicLightbox.create(
-      `
+  currentModalInstance = basicLightbox.create(
+    `
 		<img src="${imgUrl}">
 	`
-    );
-  }
-  currentModalInstance = modalDict[imgUrl];
-  modalDict[imgUrl].show();
+  );
+  currentModalInstance.show();
 });
 
-document.onkeydown = function (evt) {
-  evt = evt || window.event;
-  if (evt.key == 'Escape') {
+document.addEventListener('keydown', (event) => {
+  if (event.key == 'Escape') {
     currentModalInstance.close();
   }
-};
+});
 
 function makeGalleryItem(item) {
   return item

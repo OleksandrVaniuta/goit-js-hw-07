@@ -1,10 +1,6 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-console.log(galleryItems);
-let modalDict = {};
-let currentModalInstance;
-
 const galleryItemArr = makeGalleryItem(galleryItems);
 const galleryParrentEL = document.querySelector('.gallery');
 
@@ -21,10 +17,10 @@ galleryLink.forEach((link) => {
   });
 });
 
-gallery.on('shown.simplelightbox', function (eve) {
+gallery.on('shown.simplelightbox', function (event) {
   setTimeout(function () {
     document.querySelector('.alt-txt').innerHTML =
-      eve.target.querySelector('img').alt;
+      event.target.querySelector('img').alt;
   }, 200);
 });
 
